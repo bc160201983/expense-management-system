@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Expense;
+use App\ExpenseType;
 
 class ExpensesController extends Controller
 {
@@ -13,7 +15,10 @@ class ExpensesController extends Controller
      */
     public function index()
     {
-        //
+        $expenses = Expense::all();
+        
+        return view('expenses.index')->with('expenses', $expenses);
+        
     }
 
     /**
@@ -23,7 +28,12 @@ class ExpensesController extends Controller
      */
     public function create()
     {
-        return view('expenses.create');
+
+        $expensesType = ExpenseType::all();
+
+        return view('expenses.create')->with('expensesType', $expensesType);
+
+        
     }
 
     /**
@@ -33,8 +43,27 @@ class ExpensesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $this->validate($request, [
+            'name' => 'required',
+            'amount' => 'numeric',
+            'date' => 'date',
+            'note' => 'required',
+            
+        ]);
+
+
+        $expense = new Expense;
+        $expense->name = $request->input('name');
+        $expense->amount = $request->input('amount');
+        $expense->date = $request->input('date');
+        $expense->expenseType_id = $request->input('expenseType');
+        $expense->note = $request->input('note');
+
+        $expense->save();
+
+        return redirect('/expenses')->with('success', 'Expense Created');
+
     }
 
     /**

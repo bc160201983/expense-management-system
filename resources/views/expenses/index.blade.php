@@ -1,19 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <div class="row">
-        <div class="col-lg-9">
+        <div class="col-lg">
             <a style="margin-bottom:5px;" class="au-btn au-btn-icon au-btn--blue" href="/expensestype/create"><i class="zmdi zmdi-plus"></i>Add Expense Category</a>
             <div class="table-responsive table--no-card m-b-30">
-                <table class="table table-borderless table-striped table-earning">
-                    <thead>
+                <table class="table table-borderless table-striped">
+                    <thead class="thead-dark">
                         <tr>
                             
                             <th>ID</th>
                             <th>name</th>
-                            <th>date</th>
+                            <th>Amount</th>
+                            <th>Created At</th>
+                            <th>Expense Category</th>
+                            <th>Note</th>
                             <th></th>
                             <th></th>
                             
@@ -21,16 +22,20 @@
                     </thead>
                     <tbody>
 
-                        @if (count($expensesType) > 0)
-                            @foreach ($expensesType as $expenseType)
+                        @if (count($expenses) > 0)
+                            @foreach ($expenses as $expense)
                             <tr>
                             
-                                    <td>{{$expenseType->id}}</td>
-                                    <td>{{$expenseType->title}}</td>
-                                    <td>{{$expenseType->created_at}}</td>
-                                    <td><a href="expensestype/{{$expenseType->id}}/edit" class="btn btn-outline-secondary">Edit</a></td>
+                                    <td>{{$expense->id}}</td>
+                                    <td>{{$expense->name}}</td>
+                                    <td>{{$expense->amount}}</td>
+                                    <td>{{$expense->date}}</td>
+                                    <td>{{$expense->expenseType_id}}</td>
+
+                                    <td>{{$expense->note}}</td>
+                                    <td><a href="expenses/{{$expense->id}}/edit" class="btn btn-outline-secondary">Edit</a></td>
                                     <td>
-                                        {!! Form::open(['action' => ['ExpensesTypeController@destroy', $expenseType->id], 'method' => 'Post', 'class' => 'pull-left']) !!}
+                                        {!! Form::open(['action' => ['ExpensesTypeController@destroy', $expense->id], 'method' => 'Post', 'class' => 'pull-left']) !!}
                                             {{Form::hidden('_method', 'DELETE')}}
                                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                         {!! Form::close() !!}
@@ -48,6 +53,4 @@
         </div>
      
     </div>
-
-
 @endsection

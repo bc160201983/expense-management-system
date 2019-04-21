@@ -4,30 +4,87 @@
 
 
     
-        <div class="row ">
-            <div class="col-lg-6">
-                <div class="card float-center">
-                    <div class="card-header">Expense<span class="float-right"><a href="/expenses" class="btn btn-outline-secondary btn-sm">Go Back</a><span></div>
-                    <div class="card-body">
-                        <div class="card-title">
-                            <h3 class="text-center title-2">Add Expense</h3>
-                        </div>
-                        <hr>
-                        {{ Form::open(['action' => 'ExpensesController@store', 'method' => 'POST' , 'novalidate' => 'novalidate']) }}
-                            <div class="form-group">
-                                {{Form::label('Add', 'Add', ['class' => 'control-label mb-1'])}}
-                                {{Form::text('title', '', ['class' => 'form-control', 'placeholder' => 'e.g Bills'])}}
+        <div class="row">
+            <div style="margin:auto" class="col-lg-8">
+                    <div class="card">
+                            <div class="card-header">
+                                <strong>Expense Transaction</strong>
                             </div>
-                            {{ Form::button('<i class="fa fa-save fa-lg"></i>&nbsp;Save', ['type' => 'submit', 'class' => 'btn btn-lg btn-info btn-block'] )  }}
+                            <div class="card-body card-block">
+                                <form action="{{action('ExpensesController@store')}}" method="post" class="form-horizontal">
+                                   {{ csrf_field() }}
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="text-input" class=" form-control-label">Name</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" id="text-input" name="name" placeholder="Name" class="form-control">
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="email-input" class=" form-control-label">Amount</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="number" id="email-input" name="amount" placeholder="Enter Amount" class="form-control">
+                                         
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="password-input" class=" form-control-label">Date</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="date" id="password-input" name="date" placeholder="date" class="form-control datepicker">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                            <div class="col col-md-3">
+                                                <label for="select" class=" form-control-label">Expense Category</label>
+                                            </div>
+                                           
+                                            <div class="col-12 col-md-9">
+                                                <select name="expenseType" id="select" class="form-control">
+                                                    <option value="">~~Select~~</option>
+                                                    @if (count($expensesType) > 0)
+                                                        @foreach ($expensesType as $expenseType)
+                                                            <option value="{{$expenseType->id}}">{{$expenseType->title}}</option>
+                                                        @endforeach
+                                                    @endif
+                                              
+                                                </select>
+                                            </div>
+                                        </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="note" class=" form-control-label">Note</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <textarea name="note" id="textarea-input" rows="5" placeholder="Content..." class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card-footer">
+                                
+                                            <button id="click" type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-dot-circle-o"></i> Submit
+                                            </button>
+            
+                                        </div>
+                                </form>
+                            </div>
                             
-                        {{ Form::close() }}
-                    
-                            
-                    </div>
-                </div>
+                        </div>
             </div>
             
         </div>
   
 
 @endsection
+
+<script>
+
+
+</script>
