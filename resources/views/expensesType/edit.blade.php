@@ -13,7 +13,7 @@
                             <h3 class="text-center title-2">Add Expense Category</h3>
                         </div>
                         <hr>
-                        {{ Form::open(['action' => ['ExpensesTypeContoller@update', $expenseType->id], 'method' => 'POST' , 'novalidate' => 'novalidate']) }}
+                        {{ Form::open(['action' => ['ExpensesTypeController@update', $expenseType->id], 'method' => 'POST' , 'novalidate' => 'novalidate']) }}
                             <div class="form-group">
                                 {{Form::label('Add', 'Add', ['class' => 'control-label mb-1'])}}
                                 {{Form::text('title', $expenseType->title, ['class' => 'form-control', 'placeholder' => 'e.g Bills'])}}

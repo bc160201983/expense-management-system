@@ -31,7 +31,7 @@
                                     <td>{{$expenseType->created_at}}</td>
                                     <td><a href="expensestype/{{$expenseType->id}}/edit" class="btn btn-outline-secondary">Edit</a></td>
                                     <td>
-                                        {!! Form::open(['action' => ['ExpensesTypeContoller@destroy', $expenseType->id], 'method' => 'Post', 'class' => 'pull-left']) !!}
+                                        {!! Form::open(['action' => ['ExpensesTypeController@destroy', $expenseType->id], 'method' => 'Post', 'class' => 'pull-left']) !!}
                                             {{Form::hidden('_method', 'DELETE')}}
                                             {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                                         {!! Form::close() !!}

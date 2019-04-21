@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ExpenseType;
 
-class ExpensesTypeContoller extends Controller
+class ExpensesTypeController extends Controller
 {
     /**
      * Display a listing of the resource.

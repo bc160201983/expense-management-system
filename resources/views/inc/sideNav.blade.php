@@ -22,10 +22,10 @@
                             <a href="/expensestype">Manage Expense Category</a>
                         </li>
                         <li>
-                            <a href="index3.html">Add Expense</a>
+                            <a href="/expenses/create">Add Expense</a>
                         </li>
                         <li>
-                            <a href="index4.html">Manage Expense</a>
+                            <a href="/expenses">Manage Expense</a>
                         </li>
                     </ul>
                 </li>

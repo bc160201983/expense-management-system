@@ -14,4 +14,5 @@
 Route::redirect('/', '/dashboard');
 Route::get('/dashboard', 'SiteController@index');
 
-Route::resource('/expensestype', 'ExpensesTypeContoller');
+Route::resource('/expensestype', 'ExpensesTypeController');
+Route::resource('/expenses', 'ExpensesController');
