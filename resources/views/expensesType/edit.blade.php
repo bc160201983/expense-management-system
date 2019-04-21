@@ -3,8 +3,7 @@
 @section('content')
 
 
-<button class="au-btn au-btn-icon au-btn--blue">
-        <i class="zmdi zmdi-plus"></i>add item</button>
+
         <div class="row ">          
             <div class="col-lg-6">
                 <div class="card float-center">
@@ -21,7 +20,7 @@
                             </div>
                             {{Form::hidden('_method', 'PUT')}}
                             {{ Form::button('<i class="fa fa-save fa-lg"></i>&nbsp;Save', ['type' => 'submit', 'class' => 'btn btn-lg btn-info btn-block'] )  }}
-                            
+       
                         {{ Form::close() }}
                     
                             

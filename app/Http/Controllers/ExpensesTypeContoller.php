@@ -104,6 +104,9 @@ class ExpensesTypeContoller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $expenseType = ExpenseType::find($id);
+        $expenseType->delete();
+
+        return redirect('/expensestype')->with('success', 'Expense Type Deleted');
     }
 }
