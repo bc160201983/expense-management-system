@@ -3,8 +3,9 @@
 @section('content')
 
 
-    
-        <div class="row ">
+<button class="au-btn au-btn-icon au-btn--blue">
+        <i class="zmdi zmdi-plus"></i>add item</button>
+        <div class="row ">          
             <div class="col-lg-6">
                 <div class="card float-center">
                     <div class="card-header">Expense Category <span class="float-right"><a href="/expensestype" class="btn btn-outline-secondary btn-sm">Go Back</a><span></div>
