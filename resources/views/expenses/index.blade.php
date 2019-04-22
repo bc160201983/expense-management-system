@@ -2,8 +2,23 @@
 
 @section('content')
 <div class="row">
-        <div class="col-lg">
+        <div class="col-lg"> 
             <a style="margin-bottom:5px;" class="au-btn au-btn-icon au-btn--blue" href="/expenses/create"><i class="zmdi zmdi-plus"></i>Add Expense</a>
+            
+            <div class="row form-group" style="float:right">
+                {{ csrf_field() }}
+                
+                    <div class="col-5">
+                        <label for="start_date" class=" form-control-label">Start Date</label>
+                        <input id="start_date" name="start_date" type="text" placeholder="mm/dd/yyyy" class="form-control">
+                    </div>
+                    
+                    <div class="col-5">
+                        <label for="End Date" class=" form-control-label">End Date</label>
+                        <input id="end_date" name="end_date" type="text" placeholder="mm/dd/yyyy" class="form-control">
+                    </div>
+                    <button id="submit" class="btn btn-primary" type="submit" style="height: fit-content;margin-top: auto;">Search</button>
+            </div>
             <div class="table-responsive table--no-card m-b-30">
                 <table class="table table-borderless table-striped">
                     <thead class="thead-dark">
@@ -73,4 +88,45 @@
         </div>
      
     </div>
+
+    <script>
+            $(document).ready(function(){
+              var date_input=$('input[name="start_date"]'); //our date input has the name "date"
+              var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+              var options={
+                format: 'mm/dd/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+              };
+              date_input.datepicker(options);
+
+              var date_input=$('input[name="end_date"]'); //our date input has the name "date"
+              var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+              var options={
+                format: 'mm/dd/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true,
+              };
+              date_input.datepicker(options);
+
+            })
+
+            $('#submit').click(function(){
+                var start_date = $('#start_date').val();
+                var end_date = $('#end_date').val();
+               
+                $.ajax({
+                    method:'POST',
+                    type:'json',
+                    url:"{{ route('expenses.expensesBydate') }}",
+                    date:{'_token':$('input[name=_token]').val(), sdate:start_date,edate:end_date},
+                    success:function(data){
+                        console.log(data);
+                    }
+                }); 
+            });
+        </script>
+
 @endsection

@@ -36,7 +36,7 @@
                                             <label for="password-input" class=" form-control-label">Date</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="date" id="password-input" name="date" placeholder="date" class="form-control datepicker">
+                                            <input id="date" name="date" class="form-control" placeholder="MM/DD/YYY" type="text">
                                             
                                         </div>
                                     </div>
@@ -68,7 +68,7 @@
                                     
                                     <div class="card-footer">
                                 
-                                            <button id="click" type="submit" class="btn btn-primary btn-sm">
+                                            <button id="submit" type="submit" class="btn btn-primary btn-sm">
                                                 <i class="fa fa-dot-circle-o"></i> Submit
                                             </button>
             
@@ -82,9 +82,20 @@
         </div>
   
 
+        <script>
+                $(document).ready(function(){
+                  var date_input=$('input[name="date"]'); //our date input has the name "date"
+                  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                  var options={
+                    format: 'mm/dd/yyyy',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                  };
+                  date_input.datepicker(options);
+                  date_input.datepicker('setDate', 'today');
+                })
+            </script>
+
 @endsection
 
-<script>
-
-
-</script>

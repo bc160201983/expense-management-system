@@ -137,4 +137,21 @@ class ExpensesController extends Controller
 
         return redirect('/expenses')->with('success', 'Expense Deleted');
     }
+
+    public function expensesBydate(Request $request){
+        if($request->ajax())
+     {
+      if($request->sdate != '' && $request->edate != '')
+      {
+       $data = DB::table('expenses')
+         ->whereBetween('date', array($request->sdate, $request->edate))
+         ->get();
+      }
+      else
+      {
+       $data = "Faile";
+      }
+      echo json_encode($data);
+     };
+    }
 }
