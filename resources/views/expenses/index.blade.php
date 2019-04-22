@@ -6,7 +6,7 @@
             <a style="margin-bottom:5px;" class="au-btn au-btn-icon au-btn--blue" href="/expenses/create"><i class="zmdi zmdi-plus"></i>Add Expense</a>
             
             <div class="row form-group" style="float:right">
-                {{ csrf_field() }}
+                    <meta name="csrf-token" content="{{ csrf_token() }}">
                 
                     <div class="col-5">
                         <label for="start_date" class=" form-control-label">Start Date</label>
@@ -114,18 +114,23 @@
             })
 
             $('#submit').click(function(){
+
                 var start_date = $('#start_date').val();
                 var end_date = $('#end_date').val();
-               
+               console.log(start_date);
+               console.log(end_date);
                 $.ajax({
                     method:'POST',
-                    type:'json',
+                    headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    datatype:'json',
                     url:"{{ route('expenses.expensesBydate') }}",
-                    date:{'_token':$('input[name=_token]').val(), sdate:start_date,edate:end_date},
+                    date:{start_date:start_date,end_date:end_date},
                     success:function(data){
                         console.log(data);
                     }
                 }); 
+
+
             });
         </script>
 
