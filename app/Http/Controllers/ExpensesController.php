@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Expense;
 use App\ExpenseType;
+use DB;
 
 class ExpensesController extends Controller
 {
@@ -15,9 +16,11 @@ class ExpensesController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::all();
+        $expenses = Expense::orderBy('created_at', 'desc')->get();
+        $totalAmount = DB::table('expenses')->sum('amount');
+        $expensesType = ExpenseType::all();
         
-        return view('expenses.index')->with('expenses', $expenses);
+        return view('expenses.index')->with('expenses', $expenses)->with('expensesType', $expensesType)->with('totalAmount' , $totalAmount);
         
     }
 
@@ -85,7 +88,10 @@ class ExpensesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $expense = Expense::find($id);
+        $expensesType = ExpenseType::all();
+
+        return view('expenses.edit')->with('expense', $expense)->with('expensesType', $expensesType);
     }
 
     /**
@@ -97,7 +103,25 @@ class ExpensesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'amount' => 'numeric',
+            'date' => 'date',
+            'note' => 'required',
+            
+        ]);
+
+
+        $expense = Expense::find($id);
+        $expense->name = $request->input('name');
+        $expense->amount = $request->input('amount');
+        $expense->date = $request->input('date');
+        $expense->expenseType_id = $request->input('expenseType');
+        $expense->note = $request->input('note');
+
+        $expense->save();
+
+        return redirect('/expenses')->with('success', 'Expense Updated');
     }
 
     /**
@@ -108,6 +132,9 @@ class ExpensesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $expense = Expense::find($id);
+        $expense->delete();
+
+        return redirect('/expenses')->with('success', 'Expense Deleted');
     }
 }

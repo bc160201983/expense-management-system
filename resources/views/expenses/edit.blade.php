@@ -11,14 +11,16 @@
                                 <strong>Expense Transaction<span class="float-right"><a href="/expenses" class="btn btn-outline-secondary btn-sm">Go Back</a><span></strong>
                             </div>
                             <div class="card-body card-block">
-                                <form action="{{action('ExpensesController@store')}}" method="post" class="form-horizontal">
+                                <form action="{{action('ExpensesController@update', [$expense->id])}}" method="post" class="form-horizontal">
                                    {{ csrf_field() }}
+                                   {{ method_field('PUT') }}
+                                
                                     <div class="row form-group">
                                         <div class="col col-md-3">
                                             <label for="text-input" class=" form-control-label">Name</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="text-input" name="name" placeholder="Name" class="form-control">
+                                            <input value="{{$expense->name}}" type="text" id="text-input" name="name" placeholder="Name" class="form-control">
                                         
                                         </div>
                                     </div>
@@ -27,7 +29,7 @@
                                             <label for="email-input" class=" form-control-label">Amount</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="number" id="email-input" name="amount" placeholder="Enter Amount" class="form-control">
+                                            <input value="{{$expense->amount}}" type="number" id="email-input" name="amount" placeholder="Enter Amount" class="form-control">
                                          
                                         </div>
                                     </div>
@@ -36,7 +38,7 @@
                                             <label for="password-input" class=" form-control-label">Date</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="date" id="password-input" name="date" placeholder="date" class="form-control datepicker">
+                                            <input value="{{$expense->date}}" type="date" id="password-input" name="date" placeholder="date" class="form-control datepicker">
                                             
                                         </div>
                                     </div>
@@ -50,7 +52,11 @@
                                                     <option value="">~~Select~~</option>
                                                     @if (count($expensesType) > 0)
                                                         @foreach ($expensesType as $expenseType)
+                                                            @if ($expenseType->id == $expense->expenseType_id)
+                                                                <option value="{{$expenseType->id}}" selected>{{$expenseType->title}}</option>
+                                                            @else
                                                             <option value="{{$expenseType->id}}">{{$expenseType->title}}</option>
+                                                            @endif                                                            
                                                         @endforeach
                                                     @endif
                                               
@@ -62,7 +68,7 @@
                                             <label for="note" class=" form-control-label">Note</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <textarea name="note" id="textarea-input" rows="5" placeholder="Content..." class="form-control"></textarea>
+                                            <textarea name="note" id="textarea-input" rows="5" placeholder="Content..." class="form-control">{{$expense->note}}</textarea>
                                         </div>
                                     </div>
                                     
