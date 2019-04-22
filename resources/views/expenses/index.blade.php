@@ -9,14 +9,13 @@
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                 
                     <div class="col-5">
-                        <label for="start_date" class=" form-control-label">Start Date</label>
-                        <input id="start_date" name="start_date" type="text" placeholder="mm/dd/yyyy" class="form-control">
+                            <div class="input-group input-daterange">
+                                    <input type="text" name="start_date" id="start_date" readonly class="form-control" />
+                                    <div class="input-group-addon">to</div>
+                                    <input type="text"  name="end_date" id="end_date" readonly class="form-control" />
+                            </div>
                     </div>
                     
-                    <div class="col-5">
-                        <label for="End Date" class=" form-control-label">End Date</label>
-                        <input id="end_date" name="end_date" type="text" placeholder="mm/dd/yyyy" class="form-control">
-                    </div>
                     <button id="submit" class="btn btn-primary" type="submit" style="height: fit-content;margin-top: auto;">Search</button>
             </div>
             <div class="table-responsive table--no-card m-b-30">
@@ -91,47 +90,40 @@
 
     <script>
             $(document).ready(function(){
-              var date_input=$('input[name="start_date"]'); //our date input has the name "date"
-              var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-              var options={
-                format: 'mm/dd/yyyy',
-                container: container,
-                todayHighlight: true,
-                autoclose: true,
-              };
-              date_input.datepicker(options);
+                $('.input-daterange').datepicker({
+                    todayBtn: 'linked',
+                    format: 'yyyy-mm-dd',
+                    autoclose: true
+                });
 
-              var date_input=$('input[name="end_date"]'); //our date input has the name "date"
-              var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-              var options={
-                format: 'mm/dd/yyyy',
-                container: container,
-                todayHighlight: true,
-                autoclose: true,
-              };
-              date_input.datepicker(options);
 
-            })
+                $('#submit').click(function(){
 
-            $('#submit').click(function(){
-
-                var start_date = $('#start_date').val();
-                var end_date = $('#end_date').val();
-               console.log(start_date);
-               console.log(end_date);
-                $.ajax({
-                    method:'POST',
-                    headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    datatype:'json',
-                    url:"{{ route('expenses.expensesBydate') }}",
-                    date:{start_date:start_date,end_date:end_date},
-                    success:function(data){
-                        console.log(data);
+                    var start_date = $('#start_date').val();
+                    var end_date = $('#end_date').val();
+                    
+                    if(start_date != '' && end_date != ''){
+                        $.ajax({
+                        method:'POST',
+                        headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        datatype:'json',
+                        url:"{{ route('expenses.expensesBydate') }}",
+                        date:{start_date:start_date,end_date:end_date},
+                        success:function(data){
+                            console.log(data);
+                        }
+                    }); 
+                    }else{
+                        alert('Please select date');
                     }
-                }); 
+                    
+                });
+
 
 
             });
+
+            
         </script>
 
 @endsection

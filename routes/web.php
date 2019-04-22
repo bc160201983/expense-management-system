@@ -16,4 +16,4 @@ Route::get('/dashboard', 'SiteController@index');
 
 Route::resource('/expensestype', 'ExpensesTypeController');
 Route::resource('/expenses', 'ExpensesController');
-Route::post('expenses/expensesBydate', 'ExpensesController@expensesBydate')->name('expenses.expensesBydate');
+Route::post('expenses/daterange', 'ExpensesController@expensesBydate')->name('expenses.expensesBydate');

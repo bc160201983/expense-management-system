@@ -140,8 +140,18 @@ class ExpensesController extends Controller
 
     public function expensesBydate(Request $request){
               
-            $data = $request->all();
-            return response()->json($data); 
+            if($request->ajax()){
+                if($request->input('start_date') == "" && $request->input('end_date') == ""){
+                    $data = "Noting in request";
+                }else{
+                    $data = "Tere is a data";
+                }
+            }
             
+
+            return response()->json($data);
+        
+       
+                    
     }
 }
