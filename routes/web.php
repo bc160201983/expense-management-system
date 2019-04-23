@@ -1,5 +1,5 @@
 <?php
-
+use App\Expense;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,4 +16,18 @@ Route::get('/dashboard', 'SiteController@index');
 
 Route::resource('/expensestype', 'ExpensesTypeController');
 Route::resource('/expenses', 'ExpensesController');
-Route::post('expenses/daterange', 'ExpensesController@expensesBydate')->name('expenses.expensesBydate');
+Route::post('expenses/daterange', 'ExpensesController@daterange');
+
+Route::get('test', function(){
+    $expenses = Expense::all();
+    return view('welcome')->with('expenses', $expenses);
+}); 
+
+// function(){
+
+//     if(Request::ajax()){
+//         $data = Request::all();
+//         return Response::json($data);
+//     }
+
+// });

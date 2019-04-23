@@ -38,8 +38,10 @@
                                             <label for="password-input" class=" form-control-label">Date</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input value="{{$expense->date}}" type="date" id="password-input" name="date" placeholder="date" class="form-control datepicker">
-                                            
+                                                <div class="input-group input-daterange">
+                                                        <input value="{{$expense->date}}" type="text" name="date" id="date" readonly class="form-control" />
+                                                </div>
+
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -87,10 +89,15 @@
             
         </div>
   
-
+        <script>
+            $(document).ready(function(){
+                var date = new Date();
+                $('.input-daterange').datepicker({
+                    todayBtn: 'linked',
+                    format: 'yyyy-mm-dd',
+                    autoclose: true
+            });
+            });
+                </script>
 @endsection
 
-<script>
-
-
-</script>

@@ -3,10 +3,17 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\ExpenseType;
 
 class Expense extends Model
 {
-    // public function expenseType(){
-    //     return $this->belongsTo('App\ExpenseType');
-    // }
+
+
+    protected $guarded = [];
+
+
+    public function expenseType(){
+
+        return $this->belongsTo(ExpenseType::class);
+    }
 }

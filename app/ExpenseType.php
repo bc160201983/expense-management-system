@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExpenseType extends Model
 {
-    // public function expenses(){
+    public function expenses(){
 
-    //     return $this->hasMany('App\Expense');
+        return $this->hasMany(Expense::class);
 
-    // }
+    }
 }

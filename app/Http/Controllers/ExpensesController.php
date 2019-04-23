@@ -138,20 +138,27 @@ class ExpensesController extends Controller
         return redirect('/expenses')->with('success', 'Expense Deleted');
     }
 
-    public function expensesBydate(Request $request){
+    public function daterange(Request $request){
               
             if($request->ajax()){
-                if($request->input('start_date') == "" && $request->input('end_date') == ""){
-                    $data = "Noting in request";
-                }else{
-                    $data = "Tere is a data";
-                }
-            }
-            
+                
+                if($request->start_date != '' && $request->end_date != ''){
+                    $data = DB::table('expenses')
+                    ->whereBetween('date', array($request->start_date, $request->end_date))  
+                    ->get();
 
+                }elseif($request->cat_id != ''){
+
+                    $data = Expense::where('expenseType_id', $request->cat_id)->get();
+                    
+                }else{
+                    $data = Expense::orderBy('created_at', 'desc')->get();
+                    
+                }
+            //$data['expenseType'] = ExpenseType::all();
             return response()->json($data);
-        
-       
                     
     }
+}
+
 }

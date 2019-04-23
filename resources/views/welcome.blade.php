@@ -1,99 +1,50 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<table class="table table-borderless table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            
+                            <th>ID</th>
+                            <th>name</th>
+                            <th>Amount</th>
+                            <th>Created At</th>
+                            <th>Expense Category</th>
+                            <th>Note</th>
+                            <th></th>
+                            <th></th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+@if (count($expenses) > 0)
+                            @foreach ($expenses as $expense)
+                            <tr>
+                            
+                                    <td>{{$expense->id}}</td>
+                                    <td id="name">{{$expense->name}}</td>
+                                    <td><strong>Rs.</strong> {{$expense->amount}}</td>
+                                    <td>{{$expense->date}}</td>
+        
+                                    <td>
+                                        {{-- @if (count($expensesType) > 0)
+                                            @foreach ($expensesType as $expenseType)
+                                                @if ($expense->expenseType_id == $expenseType->id)
+                                                    {{$expenseType->title}}
+                                                @endif        
+                                            @endforeach
+                                        @endif --}}
+                                        {{$expense->expensetype}}
+                                    </td>
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                                    <td>{{$expense->note}}</td>
+                                    <td><a href="expenses/{{$expense->id}}/edit" class="btn btn-outline-secondary">Edit</a></td>
+                                    <td>
+                                        {!! Form::open(['action' => ['ExpensesController@destroy', $expense->id], 'method' => 'Post', 'class' => 'pull-left']) !!}
+                                            {{Form::hidden('_method', 'DELETE')}}
+                                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                        {!! Form::close() !!}
+                                    </td>                                   
+                                </tr>
+                            @endforeach
+                        
                         @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+                    </tbody>
+</table>
