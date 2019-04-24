@@ -16,4 +16,8 @@ class Expense extends Model
 
         return $this->belongsTo(ExpenseType::class);
     }
+
+    public function date_range_filer(){
+        
+    }
 }

@@ -10,9 +10,9 @@
                 
                     <div class="col-5">
                             <div class="input-group input-daterange">
-                                    <input type="text" name="start_date" id="start_date" readonly class="form-control" />
+                                    <input value="Start Date" type="text" name="start_date" id="start_date" readonly class="form-control" />
                                     <div class="input-group-addon">to</div>
-                                    <input type="text"  name="end_date" id="end_date" readonly class="form-control" />
+                                    <input value="End Date" type="text"  name="end_date" id="end_date" readonly class="form-control" />
                             </div>
                     </div>
                     
@@ -20,7 +20,7 @@
                     <button id="refresh" class="btn btn-primary" type="submit" style="height: fit-content;margin-top: auto;margin-left: 5px;">Refresh</button>
                     <div class="col-5">
                             <select name="expenseType" id="cat_search" class="form-control">
-                                <option value="">~~Select~~</option>
+                                <option value="">~~Filer By Category~~</option>
                                 @if (count($expensesType) > 0)
                                     @foreach ($expensesType as $expenseType)
                                         <option value="{{$expenseType->id}}">{{$expenseType->title}}</option>
@@ -40,7 +40,6 @@
                             <th>name</th>
                             <th>Amount</th>
                             <th>Created At</th>
-                            <th>Expense Category</th>
                             <th>Note</th>
                             <th></th>
                             <th></th>
@@ -57,18 +56,6 @@
                                 <td id="expense_name">{{$expense->name}}</td>
                                 <td><strong>Rs.</strong> {{$expense->amount}}</td>
                                 <td>{{$expense->date}}</td>
-    
-                                <td>
-                                    @if (count($expensesType) > 0)
-                                        @foreach ($expensesType as $expenseType)
-                                            @if ($expense->expenseType_id == $expenseType->id)
-                                                {{$expenseType->title}}
-                                            @endif        
-                                        @endforeach
-                                    @endif
-                                    
-                                </td>
-
                                 <td>{{$expense->note}}</td>
                                 <td><a href="expenses/{{$expense->id}}/edit" class="btn btn-outline-secondary">Edit</a></td>
                                 <td>
@@ -114,34 +101,40 @@
                 $('.input-daterange').datepicker({
                     todayBtn: 'linked',
                     format: 'yyyy-mm-dd',
+                    todayHighlight: true,
                     autoclose: true
                 });
                 
                 function dateRange(start_date = '', end_date = '', cat_id = ''){
                         $.post('expenses/daterange', {start_date:start_date, end_date:end_date,cat_id:cat_id}, function(data){
+                            //console.log(data.expenses[0]);
+                            //for(var i = 0;)
                             console.log(data);
                             var output ="";
                             var sumAmount = 0;
-                            for(var count = 0; count < data.length; count++){
+                            for(var count = 0; count < data.expenses.length; count++){
                                 output += '<tr>';
-                                output += '<td>' + data[count].id + '</td>';
-                                output += '<td>' + data[count].name + '</td>';
-                                output += '<td>' + data[count].amount + '</td>';
-                                output += '<td>' + data[count].date + '</td>';
-                                output += '<td>' + data[count].expenseType_id + '</td>';
-                                output += '<td>' + data[count].note + '</td>';
-                                output += "<td><a class='btn btn-outline-secondary' href='expenses/"+data[count].id+"/edit'>Edit</a></td>";
+                                output += '<td>' + data.expenses[count].id + '</td>';
+                                output += '<td>' + data.expenses[count].name + '</td>';
+                                output += '<td>' + data.expenses[count].amount + '</td>';
+                                output += '<td>' + data.expenses[count].date + '</td>';
+                                output += '<td>' + data.expenses[count].note + '</td>';
+                                output += "<td><a class='btn btn-outline-secondary' href='expenses/"+data.expenses[count].id+"/edit'>Edit</a></td>";
                                 output += "<td><a class='btn btn-danger' href='#'>Delete</a></td>";
                                 output +='</tr>';
-                                sumAmount += data[count].amount;
+                                sumAmount += data.expenses[count].amount;
                             }
-
+                            //get_cat(data.expenseCat);
                             $('tbody').html(output);
                             $('#totalAmount').text(sumAmount);
                             
                             
                     });
+
                     }
+
+                    
+                    
 
                     $('#cat_search').change(function(){
                         var cat_id = $("#cat_search").val();

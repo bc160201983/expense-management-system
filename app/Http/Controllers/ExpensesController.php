@@ -143,16 +143,24 @@ class ExpensesController extends Controller
             if($request->ajax()){
                 
                 if($request->start_date != '' && $request->end_date != ''){
-                    $data = DB::table('expenses')
+                    $data['expenses'] = DB::table('expenses')
                     ->whereBetween('date', array($request->start_date, $request->end_date))  
                     ->get();
-
+                    // $expense_cat_id = array();
+                    // for($count = 0; $count < count($data['expenses']); $count++){
+                        
+                    //     $expense_cat_id[] = $data['expenses'][$count]->expenseType_id;                      
+                    //     //DB::table('expense_types')->where('id','=',$expense_cat_id)->get();
+                    // }
+                    // $data['expenseCat'] = ExpenseType::find($expense_cat_id);
+                    
+                    
                 }elseif($request->cat_id != ''){
 
-                    $data = Expense::where('expenseType_id', $request->cat_id)->get();
+                    $data['expenses'] = Expense::where('expenseType_id', $request->cat_id)->get();
                     
                 }else{
-                    $data = Expense::orderBy('created_at', 'desc')->get();
+                    $data['expenses'] = Expense::orderBy('created_at', 'desc')->get();
                     
                 }
             //$data['expenseType'] = ExpenseType::all();
@@ -160,5 +168,9 @@ class ExpensesController extends Controller
                     
     }
 }
+
+
+
+    
 
 }

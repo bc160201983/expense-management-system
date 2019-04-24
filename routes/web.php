@@ -1,5 +1,6 @@
 <?php
 use App\Expense;
+use App\ExpenseType;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,14 +15,27 @@ use App\Expense;
 Route::redirect('/', '/dashboard');
 Route::get('/dashboard', 'SiteController@index');
 
+
+
 Route::resource('/expensestype', 'ExpensesTypeController');
 Route::resource('/expenses', 'ExpensesController');
 Route::post('expenses/daterange', 'ExpensesController@daterange');
 
-Route::get('test', function(){
-    $expenses = Expense::all();
-    return view('welcome')->with('expenses', $expenses);
-}); 
+
+// Route::get('test', function(){
+//     $id = [1, 3];
+//     $expenses['expenses'] = Expense::find($id);
+    
+//     for($count = 0; $count < count($expenses['expenses']); $count++){
+//         $expense_cat_id = $expenses['expenses'][$count]->expenseType_id;
+//         echo "<hr>";
+//         echo $expenseCat['expenseCat'] = ExpenseType::find($expense_cat_id);
+//     }
+
+    
+//     //echo count($expenses['expenses']);
+   
+// }); 
 
 // function(){
 
