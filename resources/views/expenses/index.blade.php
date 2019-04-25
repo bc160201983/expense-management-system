@@ -2,25 +2,27 @@
 
 @section('content')
 <div class="row">
+    
         <div class="col-lg"> 
             <a style="margin-bottom:5px;" class="au-btn au-btn-icon au-btn--blue" href="/expenses/create"><i class="zmdi zmdi-plus"></i>Add Expense</a>
-            
+ 
             <div class="row form-group">
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                 
-                    <div class="col-5">
+                    <div class="col-4">
                             <div class="input-group input-daterange">
-                                    <input value="Start Date" type="text" name="start_date" id="start_date" readonly class="form-control" />
+                                    <input  type="text" name="start_date" id="start_date" readonly class="form-control" />
                                     <div class="input-group-addon">to</div>
-                                    <input value="End Date" type="text"  name="end_date" id="end_date" readonly class="form-control" />
+                                    <input  type="text"  name="end_date" id="end_date" readonly class="form-control" />
                             </div>
                     </div>
-                    
-                    <button id="submit" class="btn btn-primary" type="submit" style="height: fit-content;margin-top: auto;">Search</button>
-                    <button id="refresh" class="btn btn-primary" type="submit" style="height: fit-content;margin-top: auto;margin-left: 5px;">Refresh</button>
-                    <div class="col-5">
-                            <select name="expenseType" id="cat_search" class="form-control">
-                                <option value="">~~Filer By Category~~</option>
+                    <div class="col-4">
+                    <button id="submit" class="btn btn-primary" type="submit" >Filter</button>
+                    <button id="refresh" class="btn btn-primary" type="submit">Refresh</button>
+                    </div>
+                    <div class="col-4">
+                            <select name="expenseType" id="cat_search" class="form-control" style="width:auto; float:left">
+                                <option value="">~~Filter By Category~~</option>
                                 @if (count($expensesType) > 0)
                                     @foreach ($expensesType as $expenseType)
                                         <option value="{{$expenseType->id}}">{{$expenseType->title}}</option>
@@ -28,7 +30,16 @@
                                 @endif
                           
                             </select>
-                        
+                            <div class="dropdown show" style="float:right">
+                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Export
+                                    </a>
+                                  
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                      <a class="dropdown-item" href="#">CSV</a>
+                                      <a class="dropdown-item" href="{{ url('expenses/pdfview') }}">PDF</a>
+                                    </div>
+                                  </div>
                         </div>
             </div>
             <div class="table-responsive table--no-card m-b-30">
@@ -149,17 +160,17 @@
                     
 
                     if(start_date != '' && end_date != ''){
-                        dateRange(start_date, end_date);
+                        dateRange(start_date, end_date, );
                     }else{
                         alert('Please select Date');
                     }
                 });
 
             $('#refresh').click(function(){
-                // $('#start_date').val('');
-                // $('#end_date').val('');
-                // dateRange();
-                location.reload(true);
+                $('#start_date').val('');
+                $('#end_date').val('');
+                dateRange();
+                // location.reload(true);
             });
 
         });

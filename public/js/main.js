@@ -212,17 +212,21 @@
 
 
     //WidgetChart 4
+      
+  
+      $.get('dashboard/get-monthly-expense', function(response){
+        console.log(response);
     var ctx = document.getElementById("widgetChart4");
     if (ctx) {
       ctx.height = 115;
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          labels: response.months,
           datasets: [
             {
-              label: "My First dataset",
-              data: [78, 81, 80, 65, 58, 75, 60, 75, 65, 60, 60, 75],
+              label: "Monthly Expenses",
+              data: response.months_expense_sum,
               borderColor: "transparent",
               borderWidth: "0",
               backgroundColor: "rgba(255,255,255,.3)"
@@ -247,6 +251,10 @@
         }
       });
     }
+  });
+  
+
+
 
     // Recent Report
     const brandProduct = 'rgba(0,181,233,0.8)'

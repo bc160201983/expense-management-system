@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Expense;
 use App\ExpenseType;
 use DB;
+use PDF;
 
 class ExpensesController extends Controller
 {
@@ -19,6 +20,7 @@ class ExpensesController extends Controller
         $expenses = Expense::orderBy('created_at', 'desc')->get();
         $totalAmount = DB::table('expenses')->sum('amount');
         $expensesType = ExpenseType::all();
+        //$pdfview = $this->
         
         return view('expenses.index')->with('expenses', $expenses)->with('expensesType', $expensesType)->with('totalAmount' , $totalAmount);
         
@@ -163,6 +165,10 @@ class ExpensesController extends Controller
                     $data['expenses'] = Expense::orderBy('created_at', 'desc')->get();
                     
                 }
+                // if($request->has('download')){
+                //     $pdf = PDF::loadView('index', $data);
+                //     return $pdf->download('invoice.pdf');
+                // }
             //$data['expenseType'] = ExpenseType::all();
             return response()->json($data);
                     
@@ -170,7 +176,11 @@ class ExpensesController extends Controller
 }
 
 
-
+        public function pdfview(){
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadHTML('<h1>Test</h1>');
+            return $pdf->stream();
+        }
     
 
 }

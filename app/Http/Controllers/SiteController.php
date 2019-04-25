@@ -16,7 +16,11 @@ class SiteController extends Controller
         return view('dashboard.index')->with('totalExpense', $totalExpense)->with('expensesToday', $expensesToday);
     }
 
-    
+    // public function getAllSiteData(){
+    //     $data = $this->index();
+
+    //     return $data;
+    // }
 
 
 }

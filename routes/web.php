@@ -14,12 +14,15 @@ use App\ExpenseType;
 
 Route::redirect('/', '/dashboard');
 Route::get('/dashboard', 'SiteController@index');
+//Route::get('/dashboard', 'SiteController@getAllSiteData');
+Route::get('/dashboard/get-monthly-expense', 'ChartDataController@getAllExpenseData');
 
 
 
 Route::resource('/expensestype', 'ExpensesTypeController');
 Route::resource('/expenses', 'ExpensesController');
 Route::post('expenses/daterange', 'ExpensesController@daterange');
+Route::get('/expenses/pdfview', 'ExpensesController@pdfview');
 
 
 // Route::get('test', function(){

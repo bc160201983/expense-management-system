@@ -184,8 +184,9 @@
                                                 <td>{{$expenseToday->amount}}</td>
                                                 </tr>
                                             @endforeach
+                                        @else
+                                                <p style="color:white">{{"No Expense Today"}}</p>
                                         @endif
-                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -455,3 +456,10 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $.get('dashboard/get-monthly-expense', function(data){
+          console.log(data);
+      });
+    });
+</script>
