@@ -11,7 +11,7 @@
                     <a href="/dashboard">
                         <i class="fas fa-chart-bar"></i>Dashboard</a>
                 </li>
-                <li class="active has-sub">
+                <li class="{{{Request::is('expenses') ? 'active' : ''}}} has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-tachometer-alt"></i>Expense</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
@@ -26,6 +26,18 @@
                         </li>
                         <li>
                             <a href="/expenses">Manage Expense</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="{{{Request::is('employees') ? 'active' : ''}}} has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-users"></i>Employees</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="/employees/create">Add Employee</a>
+                        </li>
+                        <li>
+                            <a href="/employees">Manage Employee</a>
                         </li>
                     </ul>
                 </li>

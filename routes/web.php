@@ -23,6 +23,7 @@ Route::resource('/expensestype', 'ExpensesTypeController');
 Route::resource('/expenses', 'ExpensesController');
 Route::post('expenses/daterange', 'ExpensesController@daterange');
 Route::get('/expenses/pdfview', 'ExpensesController@pdfview');
+Route::resource('/employees', 'EmployeesController');
 
 
 // Route::get('test', function(){
