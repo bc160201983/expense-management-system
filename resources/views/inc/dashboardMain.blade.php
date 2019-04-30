@@ -458,8 +458,6 @@
 </div>
 <script>
     $(document).ready(function(){
-        $.get('dashboard/get-monthly-expense', function(data){
-          console.log(data);
-      });
+        
     });
 </script>

@@ -215,7 +215,7 @@
       
   
       $.get('dashboard/get-monthly-expense', function(response){
-        console.log(response);
+        
     var ctx = document.getElementById("widgetChart4");
     if (ctx) {
       ctx.height = 115;
@@ -225,7 +225,7 @@
           labels: response.months,
           datasets: [
             {
-              label: "Monthly Expenses",
+              label: "Month Expenses",
               data: response.months_expense_sum,
               borderColor: "transparent",
               borderWidth: "0",

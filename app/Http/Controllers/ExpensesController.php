@@ -176,11 +176,13 @@ class ExpensesController extends Controller
 }
 
 
-        public function pdfview(){
-            $pdf = App::make('dompdf.wrapper');
-            $pdf->loadHTML('<h1>Test</h1>');
-            return $pdf->stream();
-        }
+        // public function downloadpdf(){
+            
+        //     $expenses = Expense::all();
+
+        //     $pdf = PDF::loadView('expenses.pdf', compact('expenses'));
+        //     return $pdf->download('invoice.pdf');
+        // }
     
 
 }

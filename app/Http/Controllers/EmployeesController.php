@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Employee;
 
 class EmployeesController extends Controller
 {
@@ -13,7 +14,8 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        return view('employees.index');
+        $employees = Employee::all();
+        return view('employees.index')->with('employees', $employees);
     }
 
     /**
@@ -23,7 +25,7 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        //
+        return view('employees.create');
     }
 
     /**
@@ -34,7 +36,15 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'email|required',
+            'cell' => 'numeric|required',
+            'date' => 'date',
+            'designationr' => 'required',
+            'salary' => 'numeric|required',
+        ]);
+        return "Hello world";
     }
 
     /**

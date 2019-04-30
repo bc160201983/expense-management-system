@@ -120,7 +120,7 @@
                         $.post('expenses/daterange', {start_date:start_date, end_date:end_date,cat_id:cat_id}, function(data){
                             //console.log(data.expenses[0]);
                             //for(var i = 0;)
-                            console.log(data);
+                            //console.log(data);
                             var output ="";
                             var sumAmount = 0;
                             for(var count = 0; count < data.expenses.length; count++){

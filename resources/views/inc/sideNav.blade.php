@@ -7,7 +7,7 @@
     <div class="menu-sidebar__content js-scrollbar1">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
-                <li>
+                <li class="{{{Request::is('dashboard') ? 'active' : ''}}}">
                     <a href="/dashboard">
                         <i class="fas fa-chart-bar"></i>Dashboard</a>
                 </li>
