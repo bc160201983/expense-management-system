@@ -25,4 +25,9 @@ Route::post('expenses/daterange', 'ExpensesController@daterange');
 Route::resource('/employees', 'EmployeesController');
 Route::get('/downloadpdf', 'ExpensesController@downloadpdf');
 
-//Route::get('/test', 'ExpensesController@downloadpdf');
+// Route::get('/test', function(){
+//     $totalExpense = DB::table('expenses')->sum('amount');
+//     $expensesToday = DB::table('expenses')->whereDate('date', date('Y-m-d'))->get();
+
+//     return $expensesToday;
+// });

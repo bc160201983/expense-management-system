@@ -41,10 +41,24 @@ class EmployeesController extends Controller
             'email' => 'email|required',
             'cell' => 'numeric|required',
             'date' => 'date',
-            'designationr' => 'required',
+            'designation' => 'required',
             'salary' => 'numeric|required',
         ]);
-        return "Hello world";
+        
+        $employee = new Employee;
+
+        $employee->name = $request->input('name');
+        $employee->email = $request->input('email');
+        $employee->number = $request->input('cell');
+        $employee->date = $request->input('date');
+        $employee->delegation = $request->input('designation');
+        $employee->salary = $request->input('salary');
+
+        $employee->save();
+
+
+
+        return redirect('/employees')->with('success', 'New Employee Added');
     }
 
     /**
@@ -66,7 +80,9 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::find($id);
+
+        return view('employees.edit', compact('employee'));
     }
 
     /**
@@ -78,7 +94,29 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'email|required',
+            'cell' => 'numeric|required',
+            'date' => 'date',
+            'designation' => 'required',
+            'salary' => 'numeric|required',
+        ]);
+        
+        $employee = Employee::find($id);
+
+        $employee->name = $request->input('name');
+        $employee->email = $request->input('email');
+        $employee->number = $request->input('cell');
+        $employee->date = $request->input('date');
+        $employee->delegation = $request->input('designation');
+        $employee->salary = $request->input('salary');
+
+        $employee->save();
+
+
+
+        return redirect('/employees')->with('success', 'Employee Updated');
     }
 
     /**
@@ -89,6 +127,10 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::find($id);
+        $employee->delete();
+
+        return redirect('/employees')->with('success', 'Employee Deleted');
+
     }
 }

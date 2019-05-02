@@ -80,12 +80,13 @@
                                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
                                                                     <i class="zmdi zmdi-mail-send"></i>
                                                                 </button>
-                                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                <a href="/employees/{{$employee->id}}/edit" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                                     <i class="zmdi zmdi-edit"></i>
-                                                                </button>
-                                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                                    <i class="zmdi zmdi-delete"></i>
-                                                                </button>
+                                                                </a>
+                                                                {!! Form::open(['action' => ['EmployeesController@destroy', $employee->id], 'method' => 'Post', 'class' => 'pull-left']) !!}
+                                                                        {{Form::hidden('_method', 'DELETE')}}
+                                                                        <button type="submit" class="item" data-toggle="tooltip" data-placement="top" title="Delete"><i class="zmdi zmdi-delete"></i></button>
+                                                                {!! Form::close() !!}                                                           
                                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="More">
                                                                     <i class="zmdi zmdi-more"></i>
                                                                 </button>

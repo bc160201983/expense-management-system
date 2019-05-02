@@ -11,7 +11,7 @@ class SiteController extends Controller
     public function index(){
 
         $totalExpense = DB::table('expenses')->sum('amount');
-        $expensesToday = DB::table('expenses')->whereDay('date','=', date('d'))->get();
+        $expensesToday = DB::table('expenses')->whereDate('date', date('Y-m-d'))->get();
 
         return view('dashboard.index')->with('totalExpense', $totalExpense)->with('expensesToday', $expensesToday);
     }
