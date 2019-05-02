@@ -79,7 +79,14 @@ class ExpensesController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = array();
+        $expense = Expense::where('id',$id)->first();
+        $expenseType = ExpenseType::where('id', $expense->expenseType_id)->first();
+        $data = [
+            'expense' => $expense,
+            'expenseType' => $expenseType,
+        ];
+        return response()->json($data);
     }
 
     /**

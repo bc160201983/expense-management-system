@@ -51,10 +51,10 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                            <label for="password-input" class=" form-control-label">Designationr</label>
+                                            <label for="password-input" class=" form-control-label">Designation</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input id="designationr" name="designationr" class="form-control" placeholder="H.R Manager" type="text">
+                                            <input id="designation" name="designation" class="form-control" placeholder="H.R Manager" type="text">
                                             
                                         </div>
                                     </div>

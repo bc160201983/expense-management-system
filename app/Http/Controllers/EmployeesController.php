@@ -69,7 +69,8 @@ class EmployeesController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Employee::where('id',$id)->first();
+        return response()->json($data);
     }
 
     /**

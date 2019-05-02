@@ -22,7 +22,10 @@ Route::get('/dashboard/get-monthly-expense', 'ChartDataController@getAllExpenseD
 Route::resource('/expensestype', 'ExpensesTypeController');
 Route::resource('/expenses', 'ExpensesController');
 Route::post('expenses/daterange', 'ExpensesController@daterange');
+Route::get('/expenses/{id}', 'ExpensesController@show');
+
 Route::resource('/employees', 'EmployeesController');
+Route::post('employees/{id}', 'EmployeesController@show');
 Route::get('/downloadpdf', 'ExpensesController@downloadpdf');
 
 // Route::get('/test', function(){

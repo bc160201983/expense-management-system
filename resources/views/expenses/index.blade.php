@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
+
     
         <div class="col-lg"> 
             <a style="margin-bottom:5px;" class="au-btn au-btn-icon au-btn--blue" href="/expenses/create"><i class="zmdi zmdi-plus"></i>Add Expense</a>
@@ -42,6 +42,7 @@
                                   </div>
                         </div>
             </div>
+
             <div class="table-responsive table--no-card m-b-30">
                 <table class="table table-borderless table-striped">
                     <thead class="thead-dark">
@@ -52,6 +53,7 @@
                             <th>Amount</th>
                             <th>Created At</th>
                             <th>Note</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             
@@ -68,11 +70,12 @@
                                 <td><strong>Rs.</strong> {{$expense->amount}}</td>
                                 <td>{{$expense->date}}</td>
                                 <td>{{$expense->note}}</td>
+                                <td><button value="{{$expense->id}}" class="viewData btn btn-outline-primary" data-toggle="modal" data-target="#smallmodal">View</button></td>
                                 <td><a href="expenses/{{$expense->id}}/edit" class="btn btn-outline-secondary">Edit</a></td>
                                 <td>
-                                    {!! Form::open(['action' => ['ExpensesController@destroy', $expense->id], 'method' => 'Post', 'class' => 'pull-left']) !!}
+                                    {!! Form::open(['action' => ['ExpensesController@destroy', $expense->id], 'method' => 'Post', 'class' => 'pull-left', 'onclick' => 'return confirm("Are you sure?");']) !!}
                                         {{Form::hidden('_method', 'DELETE')}}
-                                        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                                        {{Form::submit('Delete', ['class' => 'btn btn-outline-danger'])}}
                                     {!! Form::close() !!}
                                 </td>                                   
                             </tr>
@@ -95,9 +98,10 @@
                            </tfoot>
                 </table>
             </div>
+
+
         </div>
-     
-    </div>
+    
 
     <script>
             $(document).ready(function(){
@@ -130,6 +134,7 @@
                                 output += '<td>' + data.expenses[count].amount + '</td>';
                                 output += '<td>' + data.expenses[count].date + '</td>';
                                 output += '<td>' + data.expenses[count].note + '</td>';
+                                output += '<td><button value="'+ data.expenses[count].id +'" class="viewData btn btn-outline-primary" data-toggle="modal" data-target="#smallmodal">View</button></td>';
                                 output += "<td><a class='btn btn-outline-secondary' href='expenses/"+data.expenses[count].id+"/edit'>Edit</a></td>";
                                 output += "<td><a class='btn btn-danger' href='#'>Delete</a></td>";
                                 output +='</tr>';
@@ -167,17 +172,61 @@
                 });
 
             $('#refresh').click(function(){
-                $('#start_date').val('');
-                $('#end_date').val('');
-                dateRange();
-                // location.reload(true);
+                // $('#start_date').val('');
+                // $('#end_date').val('');
+                //dateRange();
+                location.reload(true);
             });
+// view data
+        
+        $('.viewData').click(function(){
+            var expenses_id = $(this).val();
+            console.log(expenses_id);
+            $.get('expenses/'+expenses_id,function(data){
+                //console.log(data);
+                var output = "";
+                    output += '<ul class="list-group">';
+                    output += '<li class="list-group-item"><strong>Name: </strong>'+data.expense.name+'</li>';
+                    output += '<li class="list-group-item"><strong>Expense Amount: </strong>'+data.expense.amount+'</li>';
+                    output += '<li class="list-group-item"><strong>Expense Date: </strong>'+data.expense.date+'</li>';
+                    output += '<li class="list-group-item"><strong>Expense Category: </strong>'+data.expenseType.title+'</li>';
+                    output += '<li class="list-group-item"><strong>Note: </strong>'+data.expense.note+'</li>';
+                    // output += '<li class="list-group-item"><strong>Designation: </strong>'+data.delegation+'</li>';
+                    // output += '<li class="list-group-item"><strong>Salary: </strong>'+data.salary+'</li>';
+                    output +='</ul>';
 
+                $('.modal-body').html(output);
+            });
         });
 
-            
+
+});
+
+        
+        
 
             
         </script>
 
 @endsection
+<!-- modal small -->
+<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smallmodalLabel">Employee Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal small -->

@@ -72,8 +72,9 @@
                     @include('inc.dashboardMain')
                 @endif
                 <div class="main-content">
-                        @include('inc.messages')
+                        
                     <div class="section__content section__content--p30">
+                            @include('inc.messages')
                          @yield('content')
                     </div>
                 </div>
