@@ -7,6 +7,10 @@ use App\ExpenseType;
 
 class ExpensesTypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,6 +48,8 @@ class ExpensesTypeController extends Controller
         $expenseType = new ExpenseType;
 
         $expenseType->title = $request->input('title');
+        $expenseType->created_by = auth()->user()->id;
+        $expenseType->modified_by = auth()->user()->id;
         $expenseType->save();
 
         return redirect('/expensestype')->with('success', 'Expense Type Created');
@@ -91,6 +97,7 @@ class ExpensesTypeController extends Controller
         $expenseType = ExpenseType::find($id);
 
         $expenseType->title = $request->input('title');
+        $expenseType->modified_by = auth()->user()->id;
         $expenseType->save();
 
         return redirect('/expensestype')->with('success', 'Expense Type Updated');

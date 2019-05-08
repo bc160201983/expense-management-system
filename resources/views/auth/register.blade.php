@@ -1,6 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
+<!-- Bootstrap CSS-->
+<link href="{{ asset('vendor/bootstrap-4.1/bootstrap.min.css') }}" rel="stylesheet" media="all">
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -74,4 +73,4 @@
         </div>
     </div>
 </div>
-@endsection
+

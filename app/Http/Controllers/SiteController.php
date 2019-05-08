@@ -8,6 +8,10 @@ use DB;
 
 class SiteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index(){
 
         $totalExpense = DB::table('expenses')->sum('amount');

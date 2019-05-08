@@ -9,6 +9,11 @@ use DB;
 
 class ChartDataController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function getAllMonths(){
         $month_array = array();
         $expensesTotalMonth = Expense::orderBy('date', 'ASC')->get();

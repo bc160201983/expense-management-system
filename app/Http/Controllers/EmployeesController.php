@@ -7,6 +7,10 @@ use App\Employee;
 
 class EmployeesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -53,6 +57,7 @@ class EmployeesController extends Controller
         $employee->date = $request->input('date');
         $employee->delegation = $request->input('designation');
         $employee->salary = $request->input('salary');
+        
 
         $employee->save();
 

@@ -10,6 +10,10 @@ use PDF;
 
 class ExpensesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -64,6 +68,8 @@ class ExpensesController extends Controller
         $expense->date = $request->input('date');
         $expense->expense_type_id = $request->input('expenseType');
         $expense->note = $request->input('note');
+        $employee->created_by = auth()->user()->id;
+        $employee->modified_by = auth()->user()->id;
 
         $expense->save();
 

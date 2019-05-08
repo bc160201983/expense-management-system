@@ -39,13 +39,13 @@ Route::get('test', function(){
     
 
 });
-
+Auth::routes();
 // Route::get('/test', function(){
 //     $totalExpense = DB::table('expenses')->sum('amount');
 //     $expensesToday = DB::table('expenses')->whereDate('date', date('Y-m-d'))->get();
 
 //     return $expensesToday;
 // });
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/home', 'HomeController@index')->name('home');
