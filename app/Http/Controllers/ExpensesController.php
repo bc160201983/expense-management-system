@@ -62,7 +62,7 @@ class ExpensesController extends Controller
         $expense->name = $request->input('name');
         $expense->amount = $request->input('amount');
         $expense->date = $request->input('date');
-        $expense->expenseType_id = $request->input('expenseType');
+        $expense->expense_type_id = $request->input('expenseType');
         $expense->note = $request->input('note');
 
         $expense->save();
@@ -81,7 +81,7 @@ class ExpensesController extends Controller
     {
         $data = array();
         $expense = Expense::where('id',$id)->first();
-        $expenseType = ExpenseType::where('id', $expense->expenseType_id)->first();
+        $expenseType = ExpenseType::where('id', $expense->expense_type_id)->first();
         $data = [
             'expense' => $expense,
             'expenseType' => $expenseType,
@@ -125,7 +125,7 @@ class ExpensesController extends Controller
         $expense->name = $request->input('name');
         $expense->amount = $request->input('amount');
         $expense->date = $request->input('date');
-        $expense->expenseType_id = $request->input('expenseType');
+        $expense->expense_type_id = $request->input('expenseType');
         $expense->note = $request->input('note');
 
         $expense->save();
@@ -166,7 +166,7 @@ class ExpensesController extends Controller
                     
                 }elseif($request->cat_id != ''){
 
-                    $data['expenses'] = Expense::where('expenseType_id', $request->cat_id)->get();
+                    $data['expenses'] = Expense::where('expense_type_id', $request->cat_id)->get();
                     
                 }else{
                     $data['expenses'] = Expense::orderBy('created_at', 'desc')->get();

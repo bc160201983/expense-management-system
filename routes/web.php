@@ -27,6 +27,18 @@ Route::get('/expenses/{id}', 'ExpensesController@show');
 Route::resource('/employees', 'EmployeesController');
 Route::post('employees/{id}', 'EmployeesController@show');
 Route::get('/downloadpdf', 'ExpensesController@downloadpdf');
+Route::resource('loan', 'LoanController');
+
+Route::get('test', function(){
+    $expensesType = ExpenseType::find(1);
+
+    foreach($expensesType->expenses as $expense){
+        echo $expense;
+    }
+
+    
+
+});
 
 // Route::get('/test', function(){
 //     $totalExpense = DB::table('expenses')->sum('amount');
@@ -34,3 +46,6 @@ Route::get('/downloadpdf', 'ExpensesController@downloadpdf');
 
 //     return $expensesToday;
 // });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

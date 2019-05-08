@@ -8,16 +8,22 @@ use App\ExpenseType;
 class Expense extends Model
 {
 
+    protected $table = 'expenses';
+    protected $primaryKey = 'id';
+    // protected $guarded = [];
 
-    protected $guarded = [];
+    protected $filable = [
+        'name',
+        'amount',
+        'date',
+        'expense_type_id',
+        'note'
+    ];
 
-
-    public function expenseType(){
-
-        return $this->belongsTo(ExpenseType::class);
+    public function expense_type(){
+        return $this->belongsTo('App\ExpenseType');
     }
 
-    public function date_range_filer(){
-        
-    }
+
+    
 }

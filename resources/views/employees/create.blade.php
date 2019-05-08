@@ -18,7 +18,7 @@
                                             <label for="text-input" class=" form-control-label">Name</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="text-input" name="name" placeholder="Name" class="form-control">
+                                            <input value="{{ old('name')}}" type="text" id="text-input" name="name" placeholder="Name" class="form-control">
                                         
                                         </div>
                                     </div>
@@ -27,7 +27,7 @@
                                             <label for="email-input" class=" form-control-label">Email</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="email" id="email-input" name="email" placeholder="Enter Email" class="form-control">
+                                            <input value="{{ old('email')}}" type="email" id="email-input" name="email" placeholder="Enter Email" class="form-control">
                                          
                                         </div>
                                     </div>
@@ -36,7 +36,7 @@
                                             <label for="password-input" class=" form-control-label">Phone Number</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input id="cell" name="cell" class="form-control" placeholder="03xx-xxxxxxx" type="text">
+                                            <input value="{{ old('cell')}}" id="cell" name="cell" class="form-control" placeholder="03xx-xxxxxxx" type="text">
                                             
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                                             <label for="password-input" class=" form-control-label">Designation</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input id="designation" name="designation" class="form-control" placeholder="H.R Manager" type="text">
+                                            <input value="{{ old('designation')}}" id="designation" name="designation" class="form-control" placeholder="H.R Manager" type="text">
                                             
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                             <label for="password-input" class=" form-control-label">Salary</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input id="salary" name="salary" class="form-control" placeholder="e.g 1000" type="text">
+                                            <input value="{{ old('salary')}}" id="salary" name="salary" class="form-control" placeholder="e.g 1000" type="text">
                                             
                                         </div>
                                     </div>

@@ -42,8 +42,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="chart.html">
-                        <i class="fas fa-chart-bar"></i>Charts</a>
+                    <a href="/loan">
+                        <i class="fas fa-dollar"></i>Loan</a>
                 </li>
                 <li>
                     <a href="table.html">
