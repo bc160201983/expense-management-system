@@ -55,7 +55,7 @@
                                                 <th>email</th>
                                                 <th>Phone Number</th>
                                                 <th>date</th>
-                                                <th>Delegation</th>
+                                                <th>Designation</th>
                                                 <th>Salary</th>
                                                 <th></th>
                                             </tr>
@@ -111,7 +111,7 @@
                             </div>
                         </div>
 <!-- modal small -->
-<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+<div style="display:none" class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

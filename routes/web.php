@@ -12,6 +12,7 @@ use App\ExpenseType;
 |
 */
 
+
 Route::redirect('/', '/dashboard');
 Route::get('/dashboard', 'SiteController@index');
 //Route::get('/dashboard', 'SiteController@getAllSiteData');
@@ -23,23 +24,30 @@ Route::resource('/expensestype', 'ExpensesTypeController');
 Route::resource('/expenses', 'ExpensesController');
 Route::post('expenses/daterange', 'ExpensesController@daterange');
 Route::get('/expenses/{id}', 'ExpensesController@show');
+Route::post('expenses/upload-image', 'ExpensesController@UploadImage');
 
 Route::resource('/employees', 'EmployeesController');
 Route::post('employees/{id}', 'EmployeesController@show');
 Route::get('/downloadpdf', 'ExpensesController@downloadpdf');
 Route::resource('loan', 'LoanController');
-
-Route::get('test', function(){
-    $expensesType = ExpenseType::find(1);
-
-    foreach($expensesType->expenses as $expense){
-        echo $expense;
-    }
-
-    
-
-});
 Auth::routes();
+Route::get('test', function(){
+    $expenseTotalWeek = array();
+    $expenses = Expense::orderBy('date', 'ASC')->get();
+    $expenses = json_decode($expenses);
+
+    foreach($expenses as $unformatted_date)
+             {
+                $date = new \DateTime($unformatted_date->date);
+                $week_no = $date->format('d');
+                $week_name = $date->format('D');
+                $expenseTotalWeek[$week_no] = $week_name;
+                
+             }
+
+    return $expenseTotalWeek;
+});
+
 // Route::get('/test', function(){
 //     $totalExpense = DB::table('expenses')->sum('amount');
 //     $expensesToday = DB::table('expenses')->whereDate('date', date('Y-m-d'))->get();

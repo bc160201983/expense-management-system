@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
     
         <div class="row">
-            <div style="margin:auto" class="col-lg-8">
+            <div class="col-lg-8">
                     <div class="card">
                             <div class="card-header">
                                 <strong>Expense Transaction<span class="float-right"><a href="/expenses" class="btn btn-outline-secondary btn-sm">Go Back</a><span></strong>
@@ -65,6 +64,8 @@
                                             <textarea name="note" id="textarea-input" rows="5" placeholder="Content..." class="form-control"></textarea>
                                         </div>
                                     </div>
+                                        {{-- image area --}}
+                            
                                     
                                     <div class="card-footer">
                                 
@@ -78,12 +79,42 @@
                             
                         </div>
             </div>
+            <div class="col-lg-4">
+            <div class="card">
+                    <div class="card-header">
+                        
+                        <strong>Add Receipt Images</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        
+                            <div class="row form-group">
+                                <div class="col col-sm-8">
+                                    <input type="file" id="imageVal" name="file-multiple-input" class="form-control-file">
+                                </div>
+                                <div class="input-group-append">
+                                        <button id="uploadImage" class="btn btn-outline-secondary" type="submit">Upload</button>
+                                </div>
+                            </div>
+                        
+                    </div>
+                    <div class="card-footer">
+                        
+                    </div>
+                </div>
+            </div>
             
         </div>
   
 
         <script>
                 $(document).ready(function(){
+                    $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                    });
+
+
                   var date_input=$('input[name="date"]'); //our date input has the name "date"
                   var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
                   var options={
@@ -94,7 +125,24 @@
                   };
                   date_input.datepicker(options);
                   date_input.datepicker('setDate', 'today');
-                })
+
+                  $('#uploadImage').click(function(){
+                      //var imageVal = new Array();
+                      var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
+                        console.log(filename);
+                        if(filename != ""){
+                            $.post('upload-image', {filename:filename}, function(data){
+                                console.log(data);
+                            });
+                        }else{
+                            alert('Please Select An image');
+                        }
+                        
+                  });
+
+
+                });
+
             </script>
 
 @endsection

@@ -134,7 +134,7 @@
                                 output += '<td>' + data.expenses[count].amount + '</td>';
                                 output += '<td>' + data.expenses[count].date + '</td>';
                                 output += '<td>' + data.expenses[count].note + '</td>';
-                                output += '<td><button value="'+ data.expenses[count].id +'" class="viewData btn btn-outline-primary" data-toggle="modal" data-target="#smallmodal">View</button></td>';
+                                output += '<td><button value="'+ data.expenses[count].id +'" class="bilal btn btn-outline-primary" data-toggle="modal" data-target="#smallmodal">View</button></td>';
                                 output += "<td><a class='btn btn-outline-secondary' href='expenses/"+data.expenses[count].id+"/edit'>Edit</a></td>";
                                 output += "<td><a class='btn btn-danger' href='#'>Delete</a></td>";
                                 output +='</tr>';
@@ -181,7 +181,7 @@
         
         $('.viewData').click(function(){
             var expenses_id = $(this).val();
-            console.log(expenses_id);
+            //console.log(expenses_id);
             $.get('expenses/'+expenses_id,function(data){
                 console.log(data);
                 var output = "";
@@ -203,14 +203,16 @@
 });
 
         
-        
+        // $('.bilal').click(function(){
+        //     alert('Hello Bilal');
+        // });
 
             
         </script>
 
 @endsection
 <!-- modal small -->
-<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+<div style="display:none" class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

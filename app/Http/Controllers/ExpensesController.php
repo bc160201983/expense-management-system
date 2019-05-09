@@ -56,8 +56,10 @@ class ExpensesController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'amount' => 'numeric',
+            'expenseType' => 'required',
             'date' => 'date',
             'note' => 'required',
+
             
         ]);
 
@@ -68,8 +70,8 @@ class ExpensesController extends Controller
         $expense->date = $request->input('date');
         $expense->expense_type_id = $request->input('expenseType');
         $expense->note = $request->input('note');
-        $employee->created_by = auth()->user()->id;
-        $employee->modified_by = auth()->user()->id;
+        $expense->created_by = auth()->user()->id;
+        $expense->modified_by = auth()->user()->id;
 
         $expense->save();
 
@@ -85,14 +87,14 @@ class ExpensesController extends Controller
      */
     public function show($id)
     {
-        $data = array();
-        $expense = Expense::where('id',$id)->first();
-        $expenseType = ExpenseType::where('id', $expense->expense_type_id)->first();
-        $data = [
-            'expense' => $expense,
-            'expenseType' => $expenseType,
-        ];
-        return response()->json($data);
+        // $data = array();
+        // $expense = Expense::where('id',$id)->first();
+        // $expenseType = $expense->expense_type;
+        // $data = [
+        //     'expense' => $expense,
+        //     'expenseType' => $expenseType,
+        // ];
+        // return response()->json($data);
     }
 
     /**
@@ -133,6 +135,7 @@ class ExpensesController extends Controller
         $expense->date = $request->input('date');
         $expense->expense_type_id = $request->input('expenseType');
         $expense->note = $request->input('note');
+        $expense->modified_by = auth()->user()->id;
 
         $expense->save();
 
@@ -196,6 +199,14 @@ class ExpensesController extends Controller
         //     $pdf = PDF::loadView('expenses.pdf', compact('expenses'));
         //     return $pdf->download('invoice.pdf');
         // }
+
+        public function UploadImage(Request $request){
+            
+            $data = $request->all();
+
+
+            return response()->json($data);
+        }
     
 
 }
