@@ -11,6 +11,8 @@ class SiteController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+        //$this->middleware('user');
     }
     public function index(){
 

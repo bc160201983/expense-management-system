@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'EMS | Edit Expense')
 @section('content')
 
 

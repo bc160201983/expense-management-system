@@ -45,6 +45,18 @@
                     <a href="/loan">
                         <i class="fas fa-dollar"></i>Loan</a>
                 </li>
+                @if (Auth::user()->role !== 'user')
+
+                <li>
+                        <a href="/users">
+                            <i class="fas fa-users"></i>Users</a>
+                    </li>
+                @endif
+                
+                <li>
+                    <a href="/setting">
+                        <i class="fas fa-cogs"></i>Setting</a>
+                </li>
                 <li>
                     <a href="table.html">
                         <i class="fas fa-table"></i>Tables</a>

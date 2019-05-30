@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'EMS | Create Expense')
 @section('content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
     

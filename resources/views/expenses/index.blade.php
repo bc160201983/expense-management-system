@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'EMS | Expenses')
+
 @section('content')
 
     
@@ -183,7 +185,7 @@
             var expenses_id = $(this).val();
             //console.log(expenses_id);
             $.get('expenses/'+expenses_id,function(data){
-                console.log(data);
+                //console.log(data);
                 var output = "";
                     output += '<ul class="list-group">';
                     output += '<li class="list-group-item"><strong>Name: </strong>'+data.expense.name+'</li>';

@@ -10,7 +10,9 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>
+        @yield('title' , 'EMS Dashboard')
+    </title>
 
 <!-- Jquery JS-->
 <script src="{{ asset('vendor/jquery-3.2.1.min.js') }}"></script>

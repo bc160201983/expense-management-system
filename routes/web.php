@@ -1,6 +1,7 @@
 <?php
 use App\Expense;
 use App\ExpenseType;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,23 +31,32 @@ Route::resource('/employees', 'EmployeesController');
 Route::post('employees/{id}', 'EmployeesController@show');
 Route::get('/downloadpdf', 'ExpensesController@downloadpdf');
 Route::resource('loan', 'LoanController');
-Auth::routes();
-Route::get('test', function(){
-    $expenseTotalWeek = array();
-    $expenses = Expense::orderBy('date', 'ASC')->get();
-    $expenses = json_decode($expenses);
+Auth::routes(['register' => false]);
 
-    foreach($expenses as $unformatted_date)
-             {
-                $date = new \DateTime($unformatted_date->date);
-                $week_no = $date->format('d');
-                $week_name = $date->format('D');
-                $expenseTotalWeek[$week_no] = $week_name;
+Route::resource('users', 'UsersController');
+
+// if(auth()->user()->role == 'user' && route('/user')){
+//     redirect('dashboard');
+// }
+
+
+//Route::post('/users/save', 'UsersController@saveUser');
+// Route::get('test', function(){
+//     $expenseTotalWeek = array();
+//     $expenses = Expense::orderBy('date', 'ASC')->get();
+//     $expenses = json_decode($expenses);
+
+//     foreach($expenses as $unformatted_date)
+//              {
+//                 $date = new \DateTime($unformatted_date->date);
+//                 $week_no = $date->format('d');
+//                 $week_name = $date->format('D');
+//                 $expenseTotalWeek[$week_no] = $week_name;
                 
-             }
+//              }
 
-    return $expenseTotalWeek;
-});
+//     return $expenseTotalWeek;
+// });
 
 // Route::get('/test', function(){
 //     $totalExpense = DB::table('expenses')->sum('amount');

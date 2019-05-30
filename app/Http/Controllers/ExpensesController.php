@@ -13,6 +13,8 @@ class ExpensesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('admin');
+        //$this->middleware('user');
     }
     /**
      * Display a listing of the resource.
@@ -87,14 +89,14 @@ class ExpensesController extends Controller
      */
     public function show($id)
     {
-        // $data = array();
-        // $expense = Expense::where('id',$id)->first();
-        // $expenseType = $expense->expense_type;
-        // $data = [
-        //     'expense' => $expense,
-        //     'expenseType' => $expenseType,
-        // ];
-        // return response()->json($data);
+        $data = array();
+        $expense = Expense::where('id',$id)->first();
+        $expenseType = $expense->expense_type;
+        $data = [
+            'expense' => $expense,
+            'expenseType' => $expenseType,
+        ];
+        return response()->json($data);
     }
 
     /**
@@ -200,13 +202,13 @@ class ExpensesController extends Controller
         //     return $pdf->download('invoice.pdf');
         // }
 
-        public function UploadImage(Request $request){
+        // public function UploadImage(Request $request){
             
-            $data = $request->all();
+        //     $data = $request->all();
 
 
-            return response()->json($data);
-        }
+        //     return response()->json($data);
+        // }
     
 
 }
