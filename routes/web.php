@@ -34,6 +34,7 @@ Route::resource('loan', 'LoanController');
 Auth::routes(['register' => false]);
 
 Route::resource('users', 'UsersController');
+Route::get('get-employee-data/{id}', 'LoanController@employeeData');
 
 // if(auth()->user()->role == 'user' && route('/user')){
 //     redirect('dashboard');

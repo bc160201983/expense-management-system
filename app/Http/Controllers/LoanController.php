@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Employee;
 class LoanController extends Controller
 {
     public function __construct()
@@ -19,7 +19,8 @@ class LoanController extends Controller
      */
     public function index()
     {
-        return view('loan.index');
+        $employees = Employee::all();   
+        return view('loan.index')->with('employees', $employees);
     }
 
     /**
@@ -86,5 +87,12 @@ class LoanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function employeeData($id){
+        $employee =  Employee::find($id);
+
+        return response()->json($employee);
     }
 }

@@ -60,7 +60,8 @@
                                 </div>
                                 <div class="email__item">
                                     <div class="image img-cir img-40">
-                                        <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey" />
+                                        
+                                        <img src="{{asset('images/icon/avatar-05.jpg')}}" alt="Cynthia Harvey" />
                                     </div>
                                     <div class="content">
                                         <p>Meeting about new dashboard...</p>
@@ -124,7 +125,7 @@
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="image">
-                                <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                <img src="{{asset('images/icon/avatar-01.jpg')}}" alt="John Doe" />
                             </div>
                             <div class="content">
                                 <a class="js-acc-btn" href="#">{{Auth::user()->name}}</a>
@@ -133,7 +134,7 @@
                                 <div class="info clearfix">
                                     <div class="image">
                                         <a href="#">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                            <img src="{{asset('images/icon/avatar-01.jpg')}}" alt="John Doe" />
                                         </a>
                                     </div>
                                     <div class="content">

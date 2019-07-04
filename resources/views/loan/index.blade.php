@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
     
         <div class="col-lg"> 
             <button style="margin-bottom:5px;" class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#smallmodal"><i class="zmdi zmdi-plus"></i>Add Loan</button>
@@ -69,8 +69,30 @@
     
 
     <script>
-                 
-        </script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                    });
+
+
+            $('#employee').change(function(){
+                var emp_id = $('#employee').val();
+                console.log(emp_id);
+                $.get('get-employee-data/'+emp_id, function(data){
+                console.log(data.salary);
+                if(data != ''){
+                    $('#salary').val("Rs. " + data.salary);
+                }else{
+                    console.log("No data Found");
+                }
+            });
+            });
+            
+        });
+        
+    </script>
 
 @endsection
 <!-- modal small -->
@@ -84,7 +106,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                        
+                    
+                        <div class="form-group">
+                                <label for="employee">Select Employee</label>
+                                <select class="form-control" id="employee">
+                                    <option>~~Select Employee~~</option>
+                                    @if (count($employees))
+                                        @foreach ($employees as $employee)
+                                        <option value="{{$employee->id}}">{{$employee->name}}</option>
+                                        @endforeach    
+                                    @endif
+                                </select>                                
+                              </div>
+                              <div class="form-group">
+                                    <label for="salary">Employee Salary</label>
+                                    <input id="salary" value="" type="text" class="form-control" readonly>
+                              </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
