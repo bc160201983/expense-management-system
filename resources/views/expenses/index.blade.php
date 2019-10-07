@@ -39,7 +39,7 @@
                                   
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                       <a class="dropdown-item" href="#">CSV</a>
-                                      <a class="dropdown-item" href="{{ url('expenses/pdfview') }}">PDF</a>
+                                      <a class="dropdown-item" id="pdfGen" href="#">PDF</a>
                                     </div>
                                   </div>
                         </div>
@@ -49,7 +49,17 @@
                 <table class="table table-borderless table-striped">
                     <thead class="thead-dark">
                         <tr>
-                            
+                            <th>
+                                
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="selectAll">
+                                    <label class="form-check-label" for="selectAll">
+                                      Select All
+                                    </label>
+                                  </div>
+                                    
+                                
+                            </th>
                             <th>ID</th>
                             <th>name</th>
                             <th>Amount</th>
@@ -66,7 +76,14 @@
                         @if (count($expenses) > 0)
                         @foreach ($expenses as $expense)
                         <tr>
-                        
+                                <td>
+                                        <div class="form-check">
+                                                <input class="form-check-input checkbox" type="checkbox" value="{{$expense->id}}">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                  
+                                                </label>
+                                              </div>
+                                </td>
                                 <td id="expense_id">{{$expense->id}}</td>
                                 <td id="expense_name">{{$expense->name}}</td>
                                 <td><strong>Rs.</strong> {{$expense->amount}}</td>
@@ -109,6 +126,7 @@
             $(document).ready(function(){
                 var date = new Date();
                 
+                
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -131,6 +149,7 @@
                             var sumAmount = 0;
                             for(var count = 0; count < data.expenses.length; count++){
                                 output += '<tr>';
+                                output +='<td><div class="form-check"> <input class="form-check-input checkbox" type="checkbox" value="'+data.expenses[count].id+'"> <label class="form-check-label" for="defaultCheck1"> </label> </div></td>';
                                 output += '<td>' + data.expenses[count].id + '</td>';
                                 output += '<td>' + data.expenses[count].name + '</td>';
                                 output += '<td>' + data.expenses[count].amount + '</td>';
@@ -200,14 +219,79 @@
                 $('.modal-body').html(output);
             });
         });
+        
+        $('#selectAll').click(function(){
+            
+                if (this.checked) {
+                
+                    $('.checkbox').each(function(){
+                        this.checked = true;
+                    });
+                    
+                }else{
+                    $('.checkbox').each(function(){
+                        this.checked = false;
+                        
+                    });
+                }
+                
+        });
 
+        $('.checkbox').click(function(){
+            // var not_all_checked = [];
+        if($('.checkbox:checked').length == $('.checkbox').length){
+            $('#selectAll').prop('checked',true);
+            
+        }else{
+            $('#selectAll').prop('checked',false);
+            //not_all_checked.push($('.checkbox:checked').val());
+        }
 
+            // console.log(not_all_checked);
+        });
+
+       $('#pdfGen').click(function(){
+           //alert(getCheckedValues());
+           var checkVal = getCheckedValues();
+           //alert(checkVal);
+            $.post('expenses/genpdf', {checkVal:checkVal}, function(data){
+                
+                //console.log(data);
+                    
+                var win = window.open('about:blank');
+                win.document.open();
+                win.document.write(data);
+                //win.prin();
+                win.document.close();
+
+            });
+       });
+
+//ready function close
 });
 
         
         // $('.bilal').click(function(){
         //     alert('Hello Bilal');
         // });
+
+function getCheckedValues(){
+    var checkArry = [];
+
+    $('.checkbox:checked').each(function(){
+        checkArry.push($(this).val());
+    });
+
+    var selected;
+    selected = checkArry.join(',');
+    if(selected.length > 0){
+        return selected;
+    }else{
+        return "Please select some Check Box's";
+    }
+
+}
+
 
             
         </script>

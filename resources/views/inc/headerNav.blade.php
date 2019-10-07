@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="header-mobile-inner">
                 <a class="logo" href="/dashboard">
-                    <img src="{{asset('images/icon/logo.png')}}" alt="CoolAdmin" />
+                    <img src="{{asset('images/icon/logo.png')}}" alt="EMS" />
                 </a>
                 <button class="hamburger hamburger--slider" type="button">
                     <span class="hamburger-box">
@@ -20,24 +20,39 @@
                     <a class="js-arrow" href="/dashboard">
                         <i class="fas fa-chart-bar"></i>Dashboard</a>
                 </li>
-                <li>
-                    <a href="chart.html">
-                        <i class="fas fa-chart-bar"></i>Expense</a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                <li>
-                                        <a href="/expensestype/create">Add Expense Category</a>
-                                    </li>
-                                    <li>
-                                        <a href="/expensestype">Manage Expense Category</a>
-                                    </li>
-                                    <li>
-                                        <a href="/expenses/create">Add Expense</a>
-                                    </li>
-                                    <li>
-                                        <a href="/expenses">Manage Expense</a>
-                                    </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-tachometer-alt"></i>Expenses</a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="/expensestype/create">Add Expense Category</a>
+                        </li>
+                        <li>
+                            <a href="/expensestype">Manage Expense Category</a>
+                        </li>
+                        <li>
+                            <a href="/expenses/create">Add Expense</a>
+                        </li>
+                        <li>
+                            <a href="/expenses">Manage Expense</a>
+                        </li>
+                        
+                        
                     </ul>
                 </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-users"></i>Employee</a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="/employees/create">Add Employee</a>
+                        </li>
+                        <li>
+                            <a href="/employees">Manage Employee</a>
+                        </li>     
+                    </ul>
+                </li>
+                
                 <li>
                     <a href="table.html">
                         <i class="fas fa-table"></i>Tables</a>
@@ -69,45 +84,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fas fa-desktop"></i>UI Elements</a>
-                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                        <li>
-                            <a href="button.html">Button</a>
-                        </li>
-                        <li>
-                            <a href="badge.html">Badges</a>
-                        </li>
-                        <li>
-                            <a href="tab.html">Tabs</a>
-                        </li>
-                        <li>
-                            <a href="card.html">Cards</a>
-                        </li>
-                        <li>
-                            <a href="alert.html">Alerts</a>
-                        </li>
-                        <li>
-                            <a href="progress-bar.html">Progress Bars</a>
-                        </li>
-                        <li>
-                            <a href="modal.html">Modals</a>
-                        </li>
-                        <li>
-                            <a href="switch.html">Switchs</a>
-                        </li>
-                        <li>
-                            <a href="grid.html">Grids</a>
-                        </li>
-                        <li>
-                            <a href="fontawesome.html">Fontawesome Icon</a>
-                        </li>
-                        <li>
-                            <a href="typo.html">Typography</a>
-                        </li>
-                    </ul>
-                </li>
+                
             </ul>
         </div>
     </nav>

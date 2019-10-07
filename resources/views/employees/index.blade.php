@@ -160,20 +160,5 @@
     });
 
 </script>
-{{-- <div class="table-data-feature">
-        {{-- <button type="button" class="item" data-toggle="tooltip" data-placement="top" title="Send" data-toggle="modal" data-target="#smallmodal">
-            <i class="zmdi zmdi-mail-send"></i>
-        </button> --}}
-        {{-- <button value="{{$employee->id}}" class="viewData item" data-toggle="modal" data-target="#smallmodal" title="View">
-            <i class="zmdi zmdi-view-list-alt"></i>
-        </button>
-        <a href="/employees/{{$employee->id}}/edit" class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-            <i class="zmdi zmdi-edit"></i>
-        </a>
-        {!! Form::open(['action' => ['EmployeesController@destroy', $employee->id], 'method' => 'Post', 'class' => 'pull-left']) !!}
-                {{Form::hidden('_method', 'DELETE')}}
-                <button onclick="return confirm('Are you sure?')" type="submit" class="item" data-toggle="tooltip" data-placement="top" title="Delete"><i class="zmdi zmdi-delete"></i></button>
-        {!! Form::close() !!}                                                            --}}
-        
-    </div> --}}
+
 @endsection

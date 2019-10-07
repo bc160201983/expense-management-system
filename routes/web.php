@@ -1,6 +1,8 @@
 <?php
 use App\Expense;
 use App\ExpenseType;
+use App\User;
+//use App\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,14 +33,23 @@ Route::resource('/employees', 'EmployeesController');
 Route::post('employees/{id}', 'EmployeesController@show');
 Route::get('/downloadpdf', 'ExpensesController@downloadpdf');
 Route::resource('loan', 'LoanController');
-Auth::routes(['register' => false]);
+Auth::routes();
 
 Route::resource('users', 'UsersController');
 Route::get('get-employee-data/{id}', 'LoanController@employeeData');
-
+Route::post('expenses/genpdf', 'PdfController@genratePdf');
+//Route::get('expenses/pdf','PdfController@showDataPdf');
 // if(auth()->user()->role == 'user' && route('/user')){
 //     redirect('dashboard');
 // }
+
+Route::get("ahmad", function(){
+
+	$users = User::all();
+
+	print_r($users);
+
+});
 
 
 //Route::post('/users/save', 'UsersController@saveUser');
@@ -68,3 +79,21 @@ Route::get('get-employee-data/{id}', 'LoanController@employeeData');
 
 
 //Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('mpdf1', function(){
+//     $id = array(1, 2, 3);;
+//     $data = array();
+//     $total = 0;
+//     $data = Expense::find($id);
+
+//         foreach($data as $totalAmount){
+//             $total += $totalAmount->amount; 
+//         }
+    
+   
+
+//     return response()->json([
+//         'expenses' => $data,
+//         'total' => $total,
+//     ]);
+// });

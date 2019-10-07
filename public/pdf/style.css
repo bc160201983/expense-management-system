@@ -18,7 +18,7 @@ body {
   font-family: Junge;
   position: relative;
   width: 21cm;  
-  height: 29.7cm; 
+   
   margin: 0 auto; 
   color: #001028;
   background: #FFFFFF; 
@@ -165,6 +165,7 @@ table td.unit,
 table td.qty,
 table td.total {
   font-size: 1.2em;
+  
 }
 
 table td.sub {
