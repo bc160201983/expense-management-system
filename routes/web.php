@@ -56,18 +56,11 @@ Route::get("ahmad", function(){
 // Route::get('test', function(){
 //     $expenseTotalWeek = array();
 //     $expenses = Expense::orderBy('date', 'ASC')->get();
-//     $expenses = json_decode($expenses);
+	
 
-//     foreach($expenses as $unformatted_date)
-//              {
-//                 $date = new \DateTime($unformatted_date->date);
-//                 $week_no = $date->format('d');
-//                 $week_name = $date->format('D');
-//                 $expenseTotalWeek[$week_no] = $week_name;
-                
-//              }
+// 	return $expenses;
 
-//     return $expenseTotalWeek;
+    
 // });
 
 // Route::get('/test', function(){

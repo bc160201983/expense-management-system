@@ -46,7 +46,7 @@
             </div>
 
             <div class="table-responsive table--no-card m-b-30">
-                <table class="table table-borderless table-striped">
+                <table id="expense_table" class="table table-borderless table-striped">
                     <thead class="thead-dark">
                         <tr>
                             <th>
@@ -124,6 +124,9 @@
 
     <script>
             $(document).ready(function(){
+                $("#expense_table").DataTable();
+
+
                 var date = new Date();
                 
                 
